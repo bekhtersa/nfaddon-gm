@@ -1,0 +1,22 @@
+{
+	"name": "@nfaddon/gm",
+	"version": "1.0.0",
+	"description": "GraphicsMagick File Uploader and View",
+	"license": "MIT",
+	"type": "module",
+	"repository": {
+		"url": "https://github.com/bekhtersa/nfaddon-gm.git"
+	},
+	"author": {
+		"name": "Sergey Bekhter",
+		"email": "sabgrand@gmail.com"
+	},
+	"dependencies": {
+		"@nfjs/core": "^1.0.2",
+		"@nfjs/back": "^1.0.1",
+		"@nfjs/front-server": "^1.0.5",
+		"@plcmp/pl-dom-if": "^0.1.0",
+		"async-busboy": "^1.1.0",
+		"gm": "^1.25.0"
+	}
+}
