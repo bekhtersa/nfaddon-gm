@@ -12,6 +12,10 @@ class GMImage extends PlElement {
             type: String,
             value: ''
         },
+        size: {
+            type: String,
+            value: ''
+        },
         storage: {
             type: String,
             value: 'nfcfiles'
@@ -24,11 +28,11 @@ class GMImage extends PlElement {
         }
     `;
     static template = html`
-        <img src="[[url(filename, unit, storage)]]" />
+        <img src="[[url(filename, unit, size, storage)]]" />
     `;
 
     url(filename,unit,storage) {
-        return filename?`${host}/@${storage}/view/${filename}${unit?('.'+unit):''}`:undefined;  
+        return filename?`${host}/@${storage}/view/${unit?('.'+unit):''}${size?('.'+size):''}${filename}`:undefined;  
     }
 }
 
