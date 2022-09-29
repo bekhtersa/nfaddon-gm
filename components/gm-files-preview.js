@@ -14,6 +14,10 @@ class GMFilesPreview extends PlElement {
             type: Boolean,
             value: false
         },
+        unit: {
+            type: String,
+            value: ''
+        },
         storage: {
             type: String,
             value: 'nfcfiles'
@@ -154,7 +158,7 @@ class GMFilesPreview extends PlElement {
             <div class="cont" type$="[[getType(item.type)]]">
                 <div class="file-info-container" title="[[item.name]]">
                     <div class="img">
-                        <img class="image_preview" src$="[[getImageSrc(item.value, item.type)]]" alt="[[item.name]]"/>
+                        <img class="image_preview" src$="[[getImageSrc(item.value, item.type, unit)]]" alt="[[item.name]]"/>
                         <pl-icon iconset="pl-default" size="16" icon="file"></pl-icon>
                     </div>
                     <div class="data-container">
@@ -190,9 +194,9 @@ class GMFilesPreview extends PlElement {
         return type.split('/')?.[0]??'file';
     }
 
-    getImageSrc(value, type) {
+    getImageSrc(value, type, unit) {
         const isImage = type.split('/')?.[0] === 'image';
-        return isImage && value?`${host}/@${this.storage}/view/${value.hash}`:'';
+        return isImage && value?`${host}/@${this.storage}/view/${unit?`${unit}.default.`:''}${value.hash}`:'';
     }
 
     onDownloadClick(event) {
@@ -200,7 +204,7 @@ class GMFilesPreview extends PlElement {
         link.target = "_blank";
 
         // Construct the URI
-        link.href = `${host}/@${this.storage}/download/${event.model.item.value.hash}`;
+        link.href = `${host}/@${this.storage}/download/${this.unit?`${this.unit}.default.`:''}${event.model.item.value.hash}`;
         document.body.appendChild(link);
         link.click();
 

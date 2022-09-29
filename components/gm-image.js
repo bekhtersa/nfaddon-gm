@@ -14,7 +14,7 @@ class GMImage extends PlElement {
         },
         size: {
             type: String,
-            value: ''
+            value: 'default'
         },
         storage: {
             type: String,
@@ -32,7 +32,7 @@ class GMImage extends PlElement {
     `;
 
     url(filename,unit,storage) {
-        return filename?`${host}/@${storage}/view/${unit?('.'+unit):''}${size?('.'+size):''}${filename}`:undefined;  
+        return filename?`${host}/@${storage}/view/${ (unit && size) ? `${unit}.${size}.` : '' }${filename}`:undefined;  
     }
 }
 

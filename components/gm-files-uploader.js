@@ -41,7 +41,7 @@ class GMFilesUploader extends PlElement {
         },
         unit: { 
             type: String, 
-            value: 'default' 
+            value: '' 
         },
         accept: {
             type: String
@@ -135,7 +135,7 @@ class GMFilesUploader extends PlElement {
         <pl-dom-if if=[[showPreview]]>
             <template>
                 <div class="files">
-                    <gm-files-preview storage="[[storage]]" can-delete="true" files="{{files}}"></gm-files-preview>
+                    <gm-files-preview storage="[[storage]]" can-delete="true" files="{{files}}" unit="[[unit]]"></gm-files-preview>
                 </div>
             </template>
         </pl-dom-if>
