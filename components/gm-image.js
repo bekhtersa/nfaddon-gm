@@ -31,7 +31,7 @@ class GMImage extends PlElement {
         <img src="[[url(filename, unit, size, storage)]]" />
     `;
 
-    url(filename,unit,storage) {
+    url(filename,unit,size,storage) {
         return filename?`${host}/@${storage}/view/${ (unit && size) ? `${unit}.${size}.` : '' }${filename}`:undefined;  
     }
 }
