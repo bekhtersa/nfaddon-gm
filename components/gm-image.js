@@ -32,7 +32,7 @@ class GMImage extends PlElement {
     `;
 
     url(filename,unit,size,storage) {
-        return filename?`${host}/@${storage}/view/${ (unit && size) ? `${unit}.${size}.` : '' }${filename}`:undefined;  
+        return filename?`${host}/@${storage}/view/${ (unit && size) ? `${unit}.${size}.` : '' }${filename}`:'';  
     }
 }
 
