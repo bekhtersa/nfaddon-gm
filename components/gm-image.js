@@ -26,6 +26,9 @@ class GMImage extends PlElement {
         :host{
             display: flex;
         }
+        img {
+            width: 100%;
+        }
     `;
     static template = html`
         <img src="[[url(filename, unit, size, storage)]]" />
