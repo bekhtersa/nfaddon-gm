@@ -21,6 +21,10 @@ class GMFilesPreview extends PlElement {
         storage: {
             type: String,
             value: 'nfcfiles'
+        },
+        showSize: { 
+            type: String, 
+            value: 'default' 
         }
     }
 
@@ -158,7 +162,7 @@ class GMFilesPreview extends PlElement {
             <div class="cont" type$="[[getType(item.type)]]">
                 <div class="file-info-container" title="[[item.name]]">
                     <div class="img">
-                        <img class="image_preview" src$="[[getImageSrc(item.value, item.type, unit)]]" alt="[[item.name]]"/>
+                        <img class="image_preview" src$="[[getImageSrc(item.value, item.type, unit, showSize)]]" alt="[[item.name]]"/>
                         <pl-icon iconset="pl-default" size="16" icon="file"></pl-icon>
                     </div>
                     <div class="data-container">
@@ -194,9 +198,9 @@ class GMFilesPreview extends PlElement {
         return type.split('/')?.[0]??'file';
     }
 
-    getImageSrc(value, type, unit) {
+    getImageSrc(value, type, unit, showSize) {
         const isImage = type.split('/')?.[0] === 'image';
-        return isImage && value?`${host}/@${this.storage}/view/${unit?`${unit}.default.`:''}${value.hash}`:'';
+        return isImage && value?`${host}/@${this.storage}/view/${unit?`${unit}.${showSize?showSize:'default'}.`:''}${value.hash}`:'';
     }
 
     onDownloadClick(event) {

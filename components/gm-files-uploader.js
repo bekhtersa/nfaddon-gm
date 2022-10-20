@@ -1,5 +1,6 @@
 import { PlElement, html, css } from "polylib";
 import "@plcmp/pl-icon";
+import "@plcmp/pl-dom-if";
 import "./gm-files-preview.js";
 import { requestData } from "@nfjs/front-pl/lib/RequestServer";
 
@@ -59,6 +60,10 @@ class GMFilesUploader extends PlElement {
         showPreview: {
             type: Boolean, 
             value: true 
+        },
+        showSize: { 
+            type: String, 
+            value: 'default' 
         }
     }
 
@@ -132,10 +137,10 @@ class GMFilesUploader extends PlElement {
         
             <span class="hint">[[hint]]</span>
         </div>
-        <pl-dom-if if=[[showPreview]]>
+        <pl-dom-if if="[[showPreview]]">
             <template>
                 <div class="files">
-                    <gm-files-preview storage="[[storage]]" can-delete="true" files="{{files}}" unit="[[unit]]"></gm-files-preview>
+                    <gm-files-preview storage="[[storage]]" can-delete="true" files="{{files}}" unit="[[unit]]" show-size="[[showSize]]"></gm-files-preview>
                 </div>
             </template>
         </pl-dom-if>
