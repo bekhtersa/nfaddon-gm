@@ -3,6 +3,7 @@ import "@plcmp/pl-icon";
 import "@plcmp/pl-dom-if";
 import "./gm-files-preview.js";
 import { requestData } from "@nfjs/front-pl/lib/RequestServer";
+const host = import.meta.url.match(/^[a-z]+:\/\/[^\/]+/i)?.[0] ?? '';
 
 class GMFilesUploader extends PlElement {
     static properties = {
@@ -157,8 +158,8 @@ class GMFilesUploader extends PlElement {
 
     filesChange() {
         this.validate();
-        this.file_id = this.files?.[0]?.value?.id;
-        this.file_hash = this.files?.[0]?.value?.hash;
+        this.file_id = this.files?.[0]?.value?.id || null;
+        this.file_hash = this.files?.[0]?.value?.hash || null;
     }
     async changeFile(file_hash) {
         if (file_hash && file_hash !== this.files?.[0]?.value?.hash) {
@@ -300,8 +301,8 @@ class GMFilesUploader extends PlElement {
             this.set(`files.${idx}.loaded`, done);
             this.set(`files.${idx}.progress`, progress);
         };
-
-        xhr.open('POST', url, true);
+        xhr.withCredentials = true;
+        xhr.open('POST', host + url, true);
         xhr.onload = (event) => {
             delete file._xhr;
             if (event.target.status === 200) {
@@ -313,7 +314,7 @@ class GMFilesUploader extends PlElement {
                     if(resp.error) {
                         const idx = this.files.indexOf(file);
                         this.splice('files', idx, 1);
-                        document.dispatchEvent(new CustomEvent('error', { detail: { message: resp.error } }));
+                        document.dispatchEvent(new CustomEvent('toast', { detail: { message: resp.error, options: {type: 'error', header: 'Предупреждение', timeout: 0} } }));
                     }
                 }
             } else {
@@ -325,7 +326,7 @@ class GMFilesUploader extends PlElement {
                 }
                 const idx = this.files.indexOf(file);
                 this.splice('files', idx, 1);
-                document.dispatchEvent(new CustomEvent('error', { detail: { message } }));
+                document.dispatchEvent(new CustomEvent('toast', { detail: { message, options: {type: 'error', header: 'Предупреждение', timeout: 0} } }));
             }
         };
         xhr.send(formData);
