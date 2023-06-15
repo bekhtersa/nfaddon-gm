@@ -11,12 +11,16 @@
 		"name": "Sergey Bekhter",
 		"email": "sabgrand@gmail.com"
 	},
+	"thanks": {
+		"for async-busboy": "https://github.com/m4nuC/async-busboy",
+		"for pull request": "https://github.com/m4nuC/async-busboy/pull/53"
+	},
 	"dependencies": {
 		"@nfjs/core": "^1.0.2",
 		"@nfjs/back": "^1.0.1",
 		"@nfjs/front-server": "^1.0.5",
 		"@plcmp/pl-dom-if": "^0.1.0",
-		"async-busboy": "^1.1.0",
+		"busboy": "^1.4.0",
 		"gm": "^1.25.0"
 	}
 }
